@@ -32,7 +32,7 @@ import s1 from './assets/s1.jpg';
 import s2 from './assets/s2.jpg';
 import s3 from './assets/s3.jpg';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYelp } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Star, Award, TrendingUp, Menu, X, Phone } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 // Replaced MapLibre map with Leaflet (loaded via CDN in index.html)
@@ -102,14 +102,17 @@ const areaGuides = [
   {
     title: 'Desert living, without the rush',
     text: 'Pahrump gives you room to breathe, wide-open views, and a welcoming pace that feels more balanced for everyday life.',
+    image: p1,
   },
   {
     title: 'Value with long-term upside',
     text: 'Buyers are drawn to the area for its affordability, flexibility, and ability to stretch their budget without sacrificing comfort.',
+    image: g3,
   },
   {
     title: 'A strong base for family life',
     text: 'From growing families to retirees, the community offers a quieter rhythm with the convenience of nearby access to Las Vegas.',
+    image: g6,
   },
 ];
 
@@ -212,7 +215,7 @@ export default function App() {
         duration: 0.75,
         stagger: 0.1,
         ease: 'power2.out',
-        scrollTrigger: { trigger: '.certifications-strip', start: 'top 88%', once: true },
+        scrollTrigger: { trigger: '.about-certs', start: 'top 88%', once: true },
       }
     );
 
@@ -314,13 +317,13 @@ export default function App() {
       window.L.marker([lat, lng]).addTo(mapInstance).bindPopup('3190 HW-160, Suite F<br/>Pahrump, NV 89048').openPopup();
 
       // Ensure proper rendering if the container was previously hidden or resized
-      setTimeout(() => { try { mapInstance.invalidateSize(); } catch (e) {} }, 300);
+      setTimeout(() => { try { mapInstance.invalidateSize(); } catch (e) { } }, 300);
     };
 
     tryInit();
 
     return () => {
-      try { if (mapInstance) mapInstance.remove(); } catch (e) {}
+      try { if (mapInstance) mapInstance.remove(); } catch (e) { }
     };
   }, []);
 
@@ -398,54 +401,45 @@ export default function App() {
           </div>
         </header>
 
-        <section className="certifications-strip">
-          <div className="cert-panel">
-            <div className="cert-container">
-              <div className="cert-tile"><img src={ridgeImg} alt="The Ridge" className="cert-logo" /></div>
-              <div className="cert-tile"><img src={realtorImg} alt="Realtor" className="cert-logo" /></div>
-              <div className="cert-tile"><img src={equalhousingImg} alt="Equal Housing Opportunity" className="cert-logo" /></div>
-              <div className="cert-tile"><img src={parhumpImg} alt="Pahrump" className="cert-logo" /></div>
-            </div>
-          </div>
-        </section>
-
         <section id="listings" className="search-section">
-          <div className="section-header">
-            <span className="section-label">Pahrump, Nevada</span>
-            <motion.h3 {...fadeUp} className="search-title">Find Your Dream Home</motion.h3>
-            <motion.h2 {...fadeUp}>Search Listings</motion.h2>
+          <div className="search-content">
+            <div className="section-header">
+              <span className="section-label">Pahrump, Nevada</span>
+              <motion.h3 {...fadeUp} className="search-title">Find Your Dream Home</motion.h3>
+              <motion.h2 {...fadeUp}>Search Listings</motion.h2>
+            </div>
+            <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
+              <div className="input-group">
+                <label htmlFor="loc">Location</label>
+                <select id="loc"><option>Any Location</option><option>Pahrump</option><option>Las Vegas</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="type">Type</label>
+                <select id="type"><option>Any Type</option><option>Residential</option><option>Commercial</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="sort">Sort By</label>
+                <select id="sort"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="beds">Bedrooms</label>
+                <select id="beds"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="baths">Baths</label>
+                <select id="baths"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="min">Min Price</label>
+                <select id="min"><option>Any Price</option><option>$100k</option><option>$300k</option><option>$500k</option></select>
+              </div>
+              <div className="input-group">
+                <label htmlFor="max">Max Price</label>
+                <select id="max"><option>Any Price</option><option>$500k</option><option>$1M+</option><option>$5M+</option></select>
+              </div>
+              <button type="submit" className="btn btn-primary search-submit">Search Now</button>
+            </form>
           </div>
-          <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
-            <div className="input-group">
-              <label htmlFor="loc">Location</label>
-              <select id="loc"><option>Any Location</option><option>Pahrump</option><option>Las Vegas</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="type">Type</label>
-              <select id="type"><option>Any Type</option><option>Residential</option><option>Commercial</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="sort">Sort By</label>
-              <select id="sort"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="beds">Bedrooms</label>
-              <select id="beds"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="baths">Baths</label>
-              <select id="baths"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="min">Min Price</label>
-              <select id="min"><option>Any Price</option><option>$100k</option><option>$300k</option><option>$500k</option></select>
-            </div>
-            <div className="input-group">
-              <label htmlFor="max">Max Price</label>
-              <select id="max"><option>Any Price</option><option>$500k</option><option>$1M+</option><option>$5M+</option></select>
-            </div>
-            <button type="submit" className="btn btn-primary search-submit">Search Now</button>
-          </form>
         </section>
 
         <section id="about" className="blended-about-section">
@@ -472,25 +466,35 @@ export default function App() {
 
             <div className="trust-row">
               <div className="trust-item">
-                <Award size={20} />
+                <Award size={18} />
                 <div>
                   <strong><CountUp end={30} suffix="+" /></strong>
                   <span>Years Experience</span>
                 </div>
               </div>
               <div className="trust-item">
-                <TrendingUp size={20} />
+                <TrendingUp size={18} />
                 <div>
                   <strong><CountUp end={500} suffix="+" /></strong>
                   <span>Homes Sold</span>
                 </div>
               </div>
               <div className="trust-item">
-                <Star size={20} />
+                <Star size={18} />
                 <div>
                   <strong>$28.5M</strong>
                   <span>Closed Volume</span>
                 </div>
+              </div>
+            </div>
+
+            <div className="about-certs">
+              <span className="about-certs-label">Certified &amp; Affiliated With</span>
+              <div className="about-certs-row">
+                <div className="about-cert-item"><img src={ridgeImg} alt="The Ridge" className="cert-logo" /></div>
+                <div className="about-cert-item"><img src={realtorImg} alt="Realtor" className="cert-logo" /></div>
+                <div className="about-cert-item"><img src={equalhousingImg} alt="Equal Housing Opportunity" className="cert-logo" /></div>
+                <div className="about-cert-item"><img src={parhumpImg} alt="Pahrump" className="cert-logo" /></div>
               </div>
             </div>
           </motion.div>
@@ -611,7 +615,7 @@ export default function App() {
           </div>
         </section>
 
-        
+
 
         <section className="recent-sales-section">
           <div className="section-header">
@@ -653,17 +657,21 @@ export default function App() {
             {testimonials.map((item, idx) => (
               <motion.article
                 key={item.name}
-                className="testimonial-card"
+                className={`testimonial-card ${idx === 1 ? 'testimonial-featured' : ''}`}
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: idx * 0.08 }}
               >
+                <span className="testimonial-quote-mark">“</span>
                 <div className="testimonial-stars" aria-label="Five star rating">★★★★★</div>
                 <p>“{item.quote}”</p>
                 <div className="testimonial-author">
-                  <strong>{item.name}</strong>
-                  <span>{item.detail}</span>
+                  <span className="testimonial-avatar">{item.name.charAt(0)}</span>
+                  <div className="testimonial-author-text">
+                    <strong>{item.name}</strong>
+                    <span>{item.detail}</span>
+                  </div>
                 </div>
               </motion.article>
             ))}
@@ -686,48 +694,16 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: idx * 0.09 }}
               >
-                <span className="area-number">0{idx + 1}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+                <div className="area-card-image">
+                  <img src={item.image} alt={item.title} loading="lazy" />
+                  <span className="area-number">0{idx + 1}</span>
+                </div>
+                <div className="area-card-body">
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
               </motion.article>
             ))}
-          </div>
-        </section>
-
-        <section className="faq-section">
-          <div className="section-header">
-            <span className="section-label">Frequently Asked Questions</span>
-            <motion.h2 {...fadeUp}>FAQ</motion.h2>
-          </div>
-
-          <div className="faq-list">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <motion.div
-                  key={faq.question}
-                  className={`faq-item ${isOpen ? 'open' : ''}`}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.55, delay: idx * 0.06 }}
-                  whileHover={{ y: -2 }}
-                >
-                  <button
-                    type="button"
-                    className="faq-question"
-                    onClick={() => setOpenFaq(isOpen ? -1 : idx)}
-                    aria-expanded={isOpen}
-                  >
-                    <span>{faq.question}</span>
-                    <span className="faq-toggle">{isOpen ? '−' : '+'}</span>
-                  </button>
-                  <div className="faq-answer">
-                    <p>{faq.answer}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
           </div>
         </section>
 
@@ -795,6 +771,68 @@ export default function App() {
           </div>
         </section>
 
+        <section className="faq-section">
+          <div className="section-header">
+            <span className="section-label">Frequently Asked Questions</span>
+            <motion.h2 {...fadeUp}>FAQ</motion.h2>
+          </div>
+
+          <div className="faq-list">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <motion.div
+                  key={faq.question}
+                  className={`faq-item ${isOpen ? 'open' : ''}`}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.55, delay: idx * 0.06 }}
+                >
+                  <button
+                    type="button"
+                    className="faq-question"
+                    onClick={() => setOpenFaq(isOpen ? -1 : idx)}
+                    aria-expanded={isOpen}
+                  >
+                    <span>{faq.question}</span>
+                    <span className="faq-toggle">
+                      <motion.div
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {isOpen ? '−' : '+'}
+                      </motion.div>
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        className="faq-answer-wrapper"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      >
+                        <div className="faq-answer">
+                          <motion.p
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                          >
+                            {faq.answer}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+
+
         <section id="contact" className="contact-section">
           <div className="contact-bg-split"></div>
           <div className="contact-container">
@@ -811,7 +849,7 @@ export default function App() {
 
               <div className="info-block">
                 <MapPin className="info-icon" size={20} />
-                <p>3190 HW-160, Suite F<br/>Pahrump, NV 89048</p>
+                <p>3190 HW-160, Suite F<br />Pahrump, NV 89048</p>
               </div>
 
               <div className="info-block">
@@ -821,11 +859,11 @@ export default function App() {
 
               <div className="info-block">
                 <h4>Office Hours</h4>
-                <p>Open daily 8:00 am - 7:00 pm<br/>Appointments outside office hours available upon request.</p>
+                <p>Open daily 8:00 am - 7:00 pm<br />Appointments outside office hours available upon request.</p>
               </div>
 
               <div className="map-container">
-                    <div id="leaflet-map" ref={mapRef} style={{ width: '100%', height: '100%' }} />
+                <div id="leaflet-map" ref={mapRef} style={{ width: '100%', height: '100%' }} />
               </div>
             </motion.div>
 
@@ -880,26 +918,24 @@ export default function App() {
         </section>
 
         <footer className="footer">
-          <div className="footer-content">
+          <div className="footer-inner">
             <div className="footer-brand">
               <h3>Marci Metzger</h3>
-              <p>Luxury Real Estate in Pahrump, NV</p>
+              <p>Luxury Real Estate &mdash; Pahrump, Nevada</p>
             </div>
-            <nav className="footer-nav">
-              <a href="#about">About</a>
-              <a href="#services">Services</a>
-              <a href="#listings">Listings</a>
-              <a href="#contact">Contact</a>
-            </nav>
+
+            <div className="footer-divider"></div>
+
             <div className="footer-socials">
-              <a href="#" className="social-icon" aria-label="Facebook"><FaFacebook size={18} /></a>
-              <a href="#" className="social-icon" aria-label="Instagram"><FaInstagram size={18} /></a>
-              <a href="#" className="social-icon" aria-label="LinkedIn"><FaLinkedin size={18} /></a>
-              <a href="#" className="social-icon" aria-label="Yelp"><FaYelp size={18} /></a>
+              <a href="#" className="social-icon" aria-label="Facebook"><FaFacebook size={17} /></a>
+              <a href="#" className="social-icon" aria-label="Instagram"><FaInstagram size={17} /></a>
+              <a href="#" className="social-icon" aria-label="LinkedIn"><FaLinkedin size={17} /></a>
+              <a href="#" className="social-icon" aria-label="Yelp"><FaYelp size={17} /></a>
             </div>
-          </div>
-          <div className="footer-bottom">
-            <p>Copyright © {new Date().getFullYear()} Marci Metzger - The Ridge Realty Group. All Rights Reserved.</p>
+
+            <div className="footer-bottom">
+              <p>© {new Date().getFullYear()} Marci Metzger &mdash; The Ridge Realty Group. All Rights Reserved.</p>
+            </div>
           </div>
         </footer>
       </div>
