@@ -555,7 +555,6 @@ export default function App() {
           <div className="section-header">
             <span className="section-label">Top Residential Sales</span>
             <motion.h2 {...fadeUp}>Get It SOLD.</motion.h2>
-            <p className="section-intro">We helped nearly 90 clients in 2021 and closed $28.5 million in sales. Our team works hard every day to grow and learn, so we may continue to excel in our market. Our clients deserve our best — and we make sure our best gets better every year.</p>
           </div>
           <div className="info-grid">
             <article className="info-card glass-card">
@@ -565,7 +564,7 @@ export default function App() {
               <div className="info-card-content">
                 <span className="info-index">01</span>
                 <h3>Strong Results in the Local Market</h3>
-                <p>Nearly 90 clients served and more than $28.5 million closed — with a strategy built for strong pricing and confident decisions every step of the way.</p>
+                <p>We helped nearly 90 clients in 2021 and closed $28.5 million in sales. Our team works hard every day to grow and learn, so we may continue to excel in our market. Our clients deserve our best — and we make sure our best gets better every year.</p>
               </div>
             </article>
 
