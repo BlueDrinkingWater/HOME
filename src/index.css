@@ -501,6 +501,17 @@ p {
   color: var(--primary);
 }
 
+.section-intro {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-main);
+  line-height: 1.8;
+  max-width: 680px;
+  margin: 1.4rem auto 0;
+  opacity: 0.85;
+}
+
 .search-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.7rem, 4vw, 4.1rem);
@@ -1359,6 +1370,7 @@ p {
 }
 
 .search-bar select,
+.search-bar input[type="number"],
 .search-bar input {
   width: 100%;
   padding: 0.65rem 0;

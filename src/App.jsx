@@ -411,31 +411,72 @@ export default function App() {
             <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
               <div className="input-group">
                 <label htmlFor="loc">Location</label>
-                <select id="loc"><option>Any Location</option><option>Pahrump</option><option>Las Vegas</option></select>
+                <select id="loc">
+                  <option>Any</option>
+                  <option>Alamo</option><option>Alton</option><option>Amargosa Valley</option>
+                  <option>Beatty</option><option>Beryl</option><option>Blue Diamond</option>
+                  <option>Boulder City</option><option>Brian Head</option><option>Cal Nev Ari</option>
+                  <option>Caliente</option><option>Cold Creek</option><option>Crystal</option>
+                  <option>Duck Creek Village</option><option>Dyer</option><option>Elko</option>
+                  <option>Ely</option><option>Goldfield</option><option>Goodsprings</option>
+                  <option>Hatch</option><option>Henderson</option><option>Indian Springs</option>
+                  <option>Jean</option><option>Las Vegas</option><option>Laughlin</option>
+                  <option>Logandale</option><option>Manhattan</option><option>Mc Gill</option>
+                  <option>Mesquite</option><option>Moapa</option><option>Mount Charleston</option>
+                  <option>Mountain Springs</option><option>North Las Vegas</option>
+                  <option>Overton</option><option>Pahrump</option><option>Palm Gardens</option>
+                  <option>Panaca</option><option>Parowan</option><option>Pioche</option>
+                  <option>Round Mountain</option><option>Sandy Valley</option>
+                  <option>Searchlight</option><option>Tonopah</option>
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="type">Type</label>
-                <select id="type"><option>Any Type</option><option>Residential</option><option>Commercial</option></select>
+                <select id="type">
+                  <option>Any Type</option>
+                  <option>Land</option>
+                  <option>Residential Lease</option>
+                  <option>High Rise</option>
+                  <option>Residential</option>
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="sort">Sort By</label>
-                <select id="sort"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select>
+                <select id="sort">
+                  <option>Newest</option>
+                  <option>Oldest</option>
+                  <option>Least Expensive to Most</option>
+                  <option>Most Expensive to Least</option>
+                  <option>Bedrooms (Low to High)</option>
+                  <option>Bedrooms (High to Low)</option>
+                  <option>Bathrooms (Low to High)</option>
+                  <option>Bathrooms (High to Low)</option>
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="beds">Bedrooms</label>
-                <select id="beds"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
+                <select id="beds">
+                  <option>Any Number</option>
+                  <option>Studio</option>
+                  <option>1+</option><option>2+</option><option>3+</option>
+                  <option>4+</option><option>5+</option><option>6+</option>
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="baths">Baths</label>
-                <select id="baths"><option>Any Number</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option></select>
+                <select id="baths">
+                  <option>Any Number</option>
+                  <option>1+</option><option>2+</option><option>3+</option>
+                  <option>4+</option><option>5+</option><option>6+</option>
+                </select>
               </div>
               <div className="input-group">
                 <label htmlFor="min">Min Price</label>
-                <select id="min"><option>Any Price</option><option>$100k</option><option>$300k</option><option>$500k</option></select>
+                <input type="number" id="min" placeholder="No Min" min="0" />
               </div>
               <div className="input-group">
                 <label htmlFor="max">Max Price</label>
-                <select id="max"><option>Any Price</option><option>$500k</option><option>$1M+</option><option>$5M+</option></select>
+                <input type="number" id="max" placeholder="No Max" min="0" />
               </div>
               <button type="submit" className="btn btn-primary search-submit">Search Now</button>
             </form>
@@ -512,8 +553,9 @@ export default function App() {
 
         <section className="info-sections">
           <div className="section-header">
-            <span className="section-label">Marci Metzger</span>
-            <motion.h2 {...fadeUp}>Buy. Sell. Invest.</motion.h2>
+            <span className="section-label">Top Residential Sales</span>
+            <motion.h2 {...fadeUp}>Get It SOLD.</motion.h2>
+            <p className="section-intro">We helped nearly 90 clients in 2021 and closed $28.5 million in sales. Our team works hard every day to grow and learn, so we may continue to excel in our market. Our clients deserve our best — and we make sure our best gets better every year.</p>
           </div>
           <div className="info-grid">
             <article className="info-card glass-card">
@@ -523,7 +565,7 @@ export default function App() {
               <div className="info-card-content">
                 <span className="info-index">01</span>
                 <h3>Strong Results in the Local Market</h3>
-                <p>Nearly 90 clients served and more than $28.5 million closed in recent years — with a strategy built for strong pricing and confident decisions.</p>
+                <p>Nearly 90 clients served and more than $28.5 million closed — with a strategy built for strong pricing and confident decisions every step of the way.</p>
               </div>
             </article>
 
@@ -533,8 +575,8 @@ export default function App() {
               </div>
               <div className="info-card-content">
                 <span className="info-index">02</span>
-                <h3>Positioned to Sell</h3>
-                <p>Every listing is prepared, marketed, and presented to the right buyers so your home earns the attention and value it deserves.</p>
+                <h3>Don't Just List It... Get It SOLD!</h3>
+                <p>We exhaust every avenue to ensure our listings are at the fingertips of every possible buyer, getting you top dollar for your home.</p>
               </div>
             </article>
 
@@ -544,8 +586,8 @@ export default function App() {
               </div>
               <div className="info-card-content">
                 <span className="info-index">03</span>
-                <h3>A Better Buying Experience</h3>
-                <p>From neighborhood guidance to pricing strategy and property fit, every step is designed to help buyers move with clarity and confidence.</p>
+                <h3>Guide to Buyers</h3>
+                <p>Nobody knows the market like we do. Enjoy having a pro at your service — market analysis, upgrades lists, contractors on speed dial, and more!</p>
               </div>
             </article>
           </div>
@@ -571,7 +613,7 @@ export default function App() {
                 <span className="svc-number">01</span>
                 <div className="svc-text">
                   <h3>Real Estate Done Right</h3>
-                  <p>Whether you're buying, selling, or investing — expert guidance every step of the way.</p>
+                  <p>Nervous about your property adventure? Don't be. Whether you're getting ready to buy or sell your residence, looking at investment properties, or just curious about the markets — our team ensures you get the best experience possible.</p>
                   <span className="svc-cta">Work with Marci →</span>
                 </div>
               </div>
@@ -590,7 +632,7 @@ export default function App() {
                   <span className="svc-number">02</span>
                   <div className="svc-text">
                     <h3>Commercial &amp; Residential</h3>
-                    <p>Every scale, every style — from condos to luxury estates.</p>
+                    <p>Large or small, condo or mansion — we can find it at the price that's right. Fixer-uppers? Luxury? We live, work, and play in this community and we're happy to help you find where to put your hard-earned dollars.</p>
                   </div>
                 </div>
               </motion.div>
@@ -607,7 +649,7 @@ export default function App() {
                   <span className="svc-number">03</span>
                   <div className="svc-text">
                     <h3>Rely on Expertise</h3>
-                    <p>Credit, affordability, loans — we connect you with the right people fast.</p>
+                    <p>If you have questions about affordability, credit, and loan options — trust us to connect you with the right people. We make sure you feel confident and educated every step of the way.</p>
                   </div>
                 </div>
               </motion.div>
@@ -859,7 +901,7 @@ export default function App() {
 
               <div className="info-block">
                 <h4>Office Hours</h4>
-                <p>Open daily 8:00 am - 7:00 pm<br />Appointments outside office hours available upon request.</p>
+                <p>Open daily 8:00 am – 7:00 pm<br />Appointments outside office hours available upon request. Just call!</p>
               </div>
 
               <div className="map-container">
